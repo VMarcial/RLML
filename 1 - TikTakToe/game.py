@@ -6,6 +6,11 @@ class grid():
                     [7,8,9]
                     ]
         self.teste = 0
+
+    #
+    def show(self):
+        pass
+
     def checkGame(self):
         for linha in self.ttt:
             if linha.count(linha[0]) == 3:
@@ -74,10 +79,7 @@ def game(tipo = ["humano", "humano"]):
             break
         else:
             turno += 1
-        
 
-class agent():
-    pass
-
+    
 if __name__ == "__main__":
     main()
