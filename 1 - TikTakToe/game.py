@@ -1,15 +1,28 @@
 
 class grid():
-    def __init__(self):
-        self.ttt = [[1,2,3],
-                    [4,5,6],
-                    [7,8,9]
-                    ]
-        self.teste = 0
 
-    #
+    def __init__(self, punishment ):
+        self.table = [0,0,0,
+                      0,0,0,
+                      0,0,0]
+        self.reward = 0
+        self.punishment
+        
+
     def show(self):
-        pass
+        #TODO deixar apresentação mais bonita
+        temp = ""
+        for i in range(0,9):
+            if self.table[i] == 1: temp = temp + "X"
+            elif self.table[i] == -1: temp = temp + "O"
+            else: print(i+1)
+            if (i+1)%3!=0:
+                temp = temp +" | "
+            else:
+                print(temp)
+                print("------")
+                temp = ""
+
 
     def checkGame(self):
         for linha in self.ttt:
@@ -29,12 +42,14 @@ class grid():
         if diagonal2.count(diagonal2[0]) == 3:
                 return diagonal2[0]
         return 0
-    
+   
+
     def changeGrid(self, player, number):
         number = int(number)
         if number > 0 and number < 10:
             number = int(number) - 1
         else:
+            self.reward -= self.punishment
             return False
 
         linha = number % 3
@@ -46,10 +61,12 @@ class grid():
 
         return True
 
+
 def main():
     game()
 
-def game(tipo = ["humano", "humano"]):
+
+def game(tipo = ["humano", "humano"], echo = True):
     gameWon = False
     playerMark = ["X", "O"]
     turno = 0
@@ -58,9 +75,10 @@ def game(tipo = ["humano", "humano"]):
     while not gameWon:
         jogador = turno % 2
         marca = playerMark[jogador]
-        print("Vez do jogador: ", marca)
+        if echo: print("Vez do jogador: ", marca)
 
         print(gameGrid.ttt)
+        #gamegrid.show()
 
         if tipo[jogador] == "humano":
             jogada = input("Número da casa: ")
@@ -72,14 +90,17 @@ def game(tipo = ["humano", "humano"]):
 
         if gameGrid.checkGame() != 0:
             gameWon = True
-            print(gameGrid.ttt)
-            print(marca, "Venceu!!!")
+            if echo:
+                print(gameGrid.ttt)
+                print(marca, "Venceu!!!")
+            if jogador == 0: return -1
+            return 1
         elif turno == 9:
-            print("Deu velha!")
-            break
+            if echo: print("Deu velha!")
+            return 0
         else:
             turno += 1
-
+    
     
 if __name__ == "__main__":
     main()
