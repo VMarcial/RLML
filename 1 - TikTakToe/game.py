@@ -2,11 +2,12 @@
 class grid():
 
     def __init__(self, punishment ):
-        self.table = [0,0,0,
-                      0,0,0,
-                      0,0,0]
-        self.reward = 0
-        self.punishment
+        self.ttt = [[0,0,0],
+                    [0,0,0],
+                    [0,0,0]]
+        
+        self.winReward = 0
+        self.wrongMovePunishment = punishment
         
 
     def show(self):
@@ -55,10 +56,10 @@ class grid():
         linha = number % 3
         coluna = number // 3
 
-        #TODO colocar um check se a casa não está ocupada
-
+        if self.ttt[coluna][linha] != 0:
+            return False 
+        
         self.ttt[coluna][linha] = player
-
         return True
 
 
@@ -68,7 +69,7 @@ def main():
 
 def game(tipo = ["humano", "humano"], echo = True):
     gameWon = False
-    playerMark = ["X", "O"]
+    playerMark = ["O", "X"]
     turno = 0
     gameGrid = grid()
 
