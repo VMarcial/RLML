@@ -9,7 +9,7 @@ import numpy as np
 
 class agent():
 
-    def __init__(self, position, batchSize = 1000, maxMemory = 100_000, nnFormat = [10,45,9], initialEpsilon = 0.01, gamma = 0.01, alpha =0.01):
+    def __init__(self, position, batchSize = 1000, maxMemory = 100_000, nnFormat = [10,45,9], initialEpsilon = 0.1, gamma = 0.9, alpha =0.001):
 
         self.gamesPlayed = 0
         self.position    = position
